@@ -1,0 +1,27 @@
+:root {
+    --theme-color: #9fa8da;
+}
+
+* {
+    font-family: 'Hind', sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+nav {
+    background-color: var(--theme-color)
+}
+
+footer.page-footer {
+    padding-top: 0;
+    text-align: right;
+    background-color: var(--theme-color);
+}
