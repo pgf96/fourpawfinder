@@ -21,6 +21,8 @@ def dogs_index(request):
     dogs = Dog.objects.all()
     return render(request, 'dogs/index.html',{'dogs': dogs})
 
+# @login_required
+
 
 @login_required
 def dogs_detail(request, dog_id):
