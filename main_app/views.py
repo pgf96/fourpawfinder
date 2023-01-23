@@ -17,12 +17,13 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-@login_required
+# @login_required
 def dogs_index(request):
     return render(request, 'dogs/index.html',{'dogs': dogs})
 
-@login_required
+# @login_required
 def dogs_detail(request, dog_id):
+    dog = Dog.objects.get(id = dog_id)
     comment_form = CommentForm()
     return render(request, 'dogs/detail.html', {
         'dog': dog,
