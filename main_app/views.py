@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, ListView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Dog, Comment
 
 # Create your views here.
@@ -16,6 +20,7 @@ def about(request):
 
 
 def dogs_index(request):
+    dogs = Dog.objects.filter(user=request.user)
     return render(request, 'dogs/index.html', {'dogs': dogs})
 
 # @login_required
@@ -23,10 +28,10 @@ def dogs_index(request):
 
 def dogs_detail(request, dog_id):
     dog = Dog.objects.get(id=dog_id)
-    comment_form = CommentForm()
+    # comment_form = CommentForm()
     return render(request, 'dogs/detail.html', {
         'dog': dog,
-        'comment_form': comment_form,
+        # 'comment_form': comment_form,
     })
 
 
@@ -42,7 +47,7 @@ def add_comment(request, dog_id):
 # add delete and update comments here
 
 
-class DogCreate(LoginRequiredMixin, CreateView):
+class DogCreate(CreateView):
     model = Dog
     fields = ['name', 'breed', 'age',
               'description', 'location', 'date_missing']
@@ -54,7 +59,7 @@ class DogCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class DogUpdate(LoginRequiredMixin, CreateView):
+class DogUpdate(LoginRequiredMixin, UpdateView):
     model = Dog
     fields = ['description', 'location']
 
@@ -62,3 +67,18 @@ class DogUpdate(LoginRequiredMixin, CreateView):
 class DogDelete(LoginRequiredMixin, DeleteView):
     model = Dog
     success_url = '/dogs/'
+
+
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
