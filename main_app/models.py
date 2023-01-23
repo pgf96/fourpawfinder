@@ -10,9 +10,17 @@ class Dog(models.Model):
     breed = models.CharField(max_length=50)
     age = models.IntegerField()
     description = models.TextField(max_length=250)
+    location = models.CharField(max_length=50)
+    date_missing = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    ordering = ['-date']
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'dog_id': self.id})
+
+    # ordering = ['-date']
 
 
 class Comment(models.Model):
@@ -21,8 +29,8 @@ class Comment(models.Model):
     dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    class Meta:
-        ordering = ['-date']
+    # class Meta:
+    #     ordering = ['-date']
 
 
 class Picture(models.Model):
