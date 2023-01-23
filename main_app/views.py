@@ -36,14 +36,19 @@ def add_comment(request, dog_id):
         new_comment = form.save(commit=False)
         new_comment.dog_id = dog_id
         new_comment.save()
-    return redirect('detail', dog_id=dog_id)
+    return redirect('detail')
 
 # add delete and update comments here
 
 class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog
     fields = ['name', 'breed', 'age', 'description', 'location', 'date_missing']
+    # redirect it to dog detail page later
     success_url = '/dogs/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class DogUpdate(LoginRequiredMixin, CreateView):
     model = Dog
