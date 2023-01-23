@@ -8,9 +8,8 @@
     <p>{{ dog.location }} </p>
     <p>{{ dog.description }} </p>
     {{ dog.user }}
-    <div class="card-action">
-        <a href="{% url 'dogs_update' dog.id %}">edit </a>
-    </div>
+    <a href="{% url 'dogs_update' dog.id %}">edit </a>
+    <a href="{% url 'dogs_delete' dog.id %}">delete </a>
 </div>
 
 
