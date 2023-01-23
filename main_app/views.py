@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from.models import Dog, Comment
 
@@ -13,12 +17,11 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-# @login_required
+@login_required
 def dogs_index(request):
-    # dogs = Dog.objects.filter(user=request.user)
     return render(request, 'dogs/index.html',{'dogs': dogs})
 
-# @login_required
+@login_required
 def dogs_detail(request, dog_id):
     comment_form = CommentForm()
     return render(request, 'dogs/detail.html', {
@@ -26,7 +29,7 @@ def dogs_detail(request, dog_id):
         'comment_form': comment_form,
     })
 
-# @login_required
+@login_required
 def add_comment(request, dog_id):
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -40,5 +43,16 @@ def add_comment(request, dog_id):
 class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog
     fields = ['name', 'breed', 'age', 'description', 'location', 'date_missing']
+    success_url = '/dogs/'
 
-class DogUpdate(Login)
+class DogUpdate(LoginRequiredMixin, CreateView):
+    model = Dog
+    fields = ['description', 'location']
+
+class DogDelete(LoginRequiredMixin, DeleteView):
+    model = Dog
+    success_url = '/dogs/'
+
+
+
+
