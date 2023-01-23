@@ -20,7 +20,11 @@ def about(request):
 
 def dogs_index(request):
     dogs = Dog.objects.all()
+<<<<<<< HEAD
     return render(request, 'dogs/index.html', {'dogs': dogs})
+=======
+    return render(request, 'dogs/index.html',{'dogs': dogs})
+>>>>>>> 7b4d3b9 (touch up views)
 
 
 @login_required
