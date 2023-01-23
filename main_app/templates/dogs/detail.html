@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Dog report</h1>
+
+<div>
+    <p>{{ dog.name }} </p>
+    <p>{{ dog.location }} </p>
+    <p>{{ dog.description }} </p>
+    {{ dog.user }}
+    <div class="card-action">
+        <a href="{% url 'dogs_update' dog.id %}">edit </a>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

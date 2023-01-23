@@ -6,31 +6,36 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-from.models import Dog, Comment
+from .models import Dog, Comment
 
 # Create your views here.
+
 
 def home(request):
     return render(request, 'home.html')
 
+
 def about(request):
     return render(request, 'about.html')
 
-# @login_required
+
 def dogs_index(request):
-    return render(request, 'dogs/index.html',{'dogs': dogs})
+    dogs = Dog.objects.filter(user=request.user)
+    return render(request, 'dogs/index.html', {'dogs': dogs})
 
 # @login_required
+
+
 def dogs_detail(request, dog_id):
-    dog = Dog.objects.get(id = dog_id)
-    comment_form = CommentForm()
+    dog = Dog.objects.get(id=dog_id)
+    # comment_form = CommentForm()
     return render(request, 'dogs/detail.html', {
         'dog': dog,
-        'comment_form': comment_form,
+        # 'comment_form': comment_form,
     })
 
-@login_required
+
+# @login_required
 def add_comment(request, dog_id):
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -41,9 +46,11 @@ def add_comment(request, dog_id):
 
 # add delete and update comments here
 
-class DogCreate(LoginRequiredMixin, CreateView):
+
+class DogCreate(CreateView):
     model = Dog
-    fields = ['name', 'breed', 'age', 'description', 'location', 'date_missing']
+    fields = ['name', 'breed', 'age',
+              'description', 'location', 'date_missing']
     # redirect it to dog detail page later
     success_url = '/dogs/'
 
@@ -51,14 +58,27 @@ class DogCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class DogUpdate(LoginRequiredMixin, CreateView):
+
+class DogUpdate(LoginRequiredMixin, UpdateView):
     model = Dog
     fields = ['description', 'location']
+
 
 class DogDelete(LoginRequiredMixin, DeleteView):
     model = Dog
     success_url = '/dogs/'
 
 
-
-
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
