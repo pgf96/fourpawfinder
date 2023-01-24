@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Dog, Comment
+from .forms import SignUpForm, CommentForm
 
 # Create your views here.
 
@@ -20,39 +19,44 @@ def about(request):
 
 
 def dogs_index(request):
-    dogs = Dog.objects.filter(user=request.user)
+    dogs = Dog.objects.all()
     return render(request, 'dogs/index.html', {'dogs': dogs})
 
-# @login_required
 
-
+@login_required
 def dogs_detail(request, dog_id):
     dog = Dog.objects.get(id=dog_id)
-    # comment_form = CommentForm()
+    comment_form = CommentForm()
     return render(request, 'dogs/detail.html', {
         'dog': dog,
-        # 'comment_form': comment_form,
+        'comment_form': comment_form,
     })
 
 
-# @login_required
+@login_required
 def add_comment(request, dog_id):
     form = CommentForm(request.POST)
     if form.is_valid():
-        new_comment = form.save(commit=False)
-        new_comment.dog_id = dog_id
-        new_comment.save()
-    return redirect('detail')
-
-# add delete and update comments here
+        form.instance.user = request.user
+        form.instance.dog = Dog.objects.get(id=dog_id)
+        form.save()
+    return redirect('detail', dog_id=dog_id)
 
 
-class DogCreate(CreateView):
+@login_required
+def delete_comment(request, comment_id, dog_id):
+    comment = Comment.objects.get(id=comment_id, dog_id=dog_id)
+    # if user != user who made the post. else give unauthorized access message
+    if request.method == 'POST':
+        comment.delete()
+    return redirect('detail', dog_id=dog_id)
+
+
+
+class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog
     fields = ['name', 'breed', 'age',
               'description', 'location', 'date_missing']
-    # redirect it to dog detail page later
-    success_url = '/dogs/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -72,13 +76,17 @@ class DogDelete(LoginRequiredMixin, DeleteView):
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
         else:
             error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
+    form = SignUpForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+
+
+
