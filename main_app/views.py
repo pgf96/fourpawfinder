@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Dog, Comment
-from .forms import SignUpForm, CommentForm
+from .forms import SignUpForm, CommentForm, DogForm
 
 # Create your views here.
 
@@ -55,8 +55,7 @@ def delete_comment(request, comment_id, dog_id):
 
 class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog
-    fields = ['name', 'breed', 'age',
-              'description', 'location', 'date_missing']
+    form_class = DogForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
