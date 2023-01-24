@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Dog, Comment
+from .forms import MyForm
 
 # Create your views here.
 
@@ -34,7 +35,6 @@ def dogs_detail(request, dog_id):
         # 'comment_form': comment_form,
     })
 
-
 # @login_required
 def add_comment(request, dog_id):
     form = CommentForm(request.POST)
@@ -61,7 +61,7 @@ class DogCreate(CreateView):
 
 class DogUpdate(LoginRequiredMixin, UpdateView):
     model = Dog
-    fields = ['description', 'location']
+    fields = ['description', 'location', 'status']
 
 
 class DogDelete(LoginRequiredMixin, DeleteView):

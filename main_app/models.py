@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+STATUS = (
+    ('FOUND', 'Found'),
+    ('LOST', 'lost')
+)
 
 class Dog(models.Model):
     name = models.CharField(max_length=50)
@@ -12,6 +16,11 @@ class Dog(models.Model):
     description = models.TextField(max_length=250)
     location = models.CharField(max_length=50)
     date_missing = models.DateField()
+    status = models.CharField(
+        max_length=5,
+        choices = STATUS,
+        default = STATUS[0][0],
+        )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
