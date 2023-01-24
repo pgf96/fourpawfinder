@@ -1,10 +1,10 @@
 from django.db import models
 from django.forms import ModelForm
+from django.forms.widgets import DateInput
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils import timezone
-from .models import Comment
-
+from .models import Comment, Dog
 
 class SignUpForm(UserCreationForm):
 
@@ -23,3 +23,12 @@ class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
+
+class DogForm(ModelForm):
+    
+    class Meta:
+        model = Dog
+        fields = ['name', 'breed', 'age', 'description', 'location', 'date_missing']
+        widgets = {
+            'date_missing': DateInput(attrs={'type': 'date'}),
+        }
