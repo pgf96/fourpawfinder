@@ -5,7 +5,6 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Dog, Comment
-from .forms import MyForm
 
 # Create your views here.
 
@@ -31,6 +30,7 @@ def dogs_detail(request, dog_id):
         'dog': dog,
         'comment_form': comment_form,
     })
+
 
 # @login_required
 def add_comment(request, dog_id):
