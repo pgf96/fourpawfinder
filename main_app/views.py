@@ -65,7 +65,7 @@ class DogCreate(LoginRequiredMixin, CreateView):
 
 class DogUpdate(LoginRequiredMixin, UpdateView):
     model = Dog
-    fields = ['description', 'location']
+    fields = ['description', 'location', 'status']
 
 
 class DogDelete(LoginRequiredMixin, DeleteView):
