@@ -7,8 +7,8 @@ from django.utils import timezone
 # Create your models here.
 
 STATUS = (
-    ('FOUND', 'Found'),
-    ('LOST', 'lost')
+    ('NOT FOUND', 'Not Found'),
+    ('FOUND', 'found')
 )
 
 class Dog(models.Model):
@@ -19,7 +19,7 @@ class Dog(models.Model):
     location = models.CharField(max_length=50)
     date_missing = models.DateField()
     status = models.CharField(
-        max_length=5,
+        max_length=10,
         choices = STATUS,
         default = STATUS[0][0],
         )
