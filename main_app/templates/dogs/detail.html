@@ -4,12 +4,19 @@
 <h1>Dog report</h1>
 
 <div>
+<<<<<<< HEAD
     <p>Name: <b>{{ dog.name }}</b> </p>
     <p>Breed:  <b>{{ dog.breed }}</b> </p>
     <p>Age (yrs):  <b>{{ dog.age }}</b> </p>
     <p>Description:  <b>{{ dog.description }}</b> </p>
     <p>Location:  <b>{{ dog.location }}</b> </p>
     <p>Date Missing:  <b>{{ dog.date_missing }}</b> </p>
+=======
+    <p><span class="purple-text" id="dog-status">{{dog.status}}</span></p>
+    <p>{{ dog.name }} </p>
+    <p>{{ dog.location }} </p>
+    <p>{{ dog.description }} </p>
+>>>>>>> 581d3b4 (add status to template)
     {{ dog.user }}
     <a href="{% url 'dogs_update' dog.id %}">edit </a>
     <a href="{% url 'dogs_delete' dog.id %}">delete </a>
