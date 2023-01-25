@@ -17,11 +17,13 @@ class Dog(models.Model):
     description = models.TextField(max_length=250)
     location = models.CharField(max_length=50)
     date_missing = models.DateField()
+    date_created = models.DateTimeField(default=timezone.now)
     status = models.CharField(
         max_length=10,
         choices = STATUS,
         default = STATUS[0][0]
         )
+    
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
