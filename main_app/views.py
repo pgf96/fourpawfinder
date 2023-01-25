@@ -24,16 +24,19 @@ def about(request):
 
 def dogs_index(request):
     dogs = Dog.objects.all()
+    # picture = Dog.picture_set.()
     return render(request, 'dogs/index.html', {'dogs': dogs})
 
 
 @login_required
 def dogs_detail(request, dog_id):
     dog = Dog.objects.get(id=dog_id)
+    picture = Picture.objects.all()
     comment_form = CommentForm()
     return render(request, 'dogs/detail.html', {
         'dog': dog,
         'comment_form': comment_form,
+        'picture': picture,
     })
 
 
@@ -107,6 +110,15 @@ def add_picture(request, dog_id):
             print('An error occurred uploading file to S3')
             print(e)
     return redirect('detail', dog_id=dog_id)
+
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        # query = form.cleaned_data['query']
+        results = Dog.objects.filter(location__contains=searched)
+        return render(request, 'main_app/search_results.html', {'results': results, 'searched': searched})
+    else:
+        return render(request, 'dogs/index.html')
 
 
 
