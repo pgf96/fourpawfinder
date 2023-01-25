@@ -4,8 +4,11 @@ from django.views.generic import DetailView, ListView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Dog, Comment
+from .models import Dog, Comment, Picture
 from .forms import SignUpForm, CommentForm, DogForm
+import boto3
+import uuid
+import os
 
 # Create your views here.
 
@@ -85,6 +88,28 @@ def signup(request):
     form = SignUpForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+
+def add_picture(request, dog_id):
+    # photo-file will be the "name" attribute on the <input type="file">
+    picture_file = request.FILES.get('picture-file', None)
+    if picture_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + picture_file.name[picture_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(picture_file, bucket, key)
+            # build the full url string
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            # we can assign to cat_id or cat (if you have a cat object)
+            Picture.objects.create(url=url, dog_id=dog_id)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
+    return redirect('detail', dog_id=dog_id)
+
 
 
 
