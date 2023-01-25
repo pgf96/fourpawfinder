@@ -16,7 +16,11 @@ urlpatterns = [
     path('dogs/<int:dog_id>/add_comment/', views.add_comment, name='add_comment'),
     path('dogs/<int:dog_id>/delete_comment/<int:comment_id>/',views.delete_comment, name='delete_comment'),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     # path('permission_denied/', views.permission_denied, name='permission_denied')    
 >>>>>>> dc1df6f (remove spacing)
+=======
+    
+>>>>>>> 9d8ffcc (change cap. of post -> POST for signup err)
 ]
