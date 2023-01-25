@@ -35,3 +35,8 @@ class EditForm(ModelForm):
         model = Dog
         fields = ['age', 'description', 'location', 'status']
         widgets = {'date_missing': DateInput(attrs={'type':'date'})}
+
+# class SearchForm(forms.Form):
+#     fields = ['query']
+#     query = forms.CharField(max_length=100)
+
