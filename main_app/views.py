@@ -4,11 +4,16 @@ from django.views.generic import DetailView, ListView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+<<<<<<< HEAD
 from .models import Dog, Comment, Picture
 from .forms import SignUpForm, CommentForm, DogForm
 import boto3
 import uuid
 import os
+=======
+from .models import Dog, Comment
+from .forms import SignUpForm, CommentForm, DogForm, EditForm
+>>>>>>> 3ba730b (adjusted forms)
 
 # Create your views here.
 
@@ -67,7 +72,7 @@ class DogCreate(LoginRequiredMixin, CreateView):
 
 class DogUpdate(LoginRequiredMixin, UpdateView):
     model = Dog
-    form_class = DogForm
+    form_class = EditForm
 
 class DogDelete(LoginRequiredMixin, DeleteView):
     model = Dog
