@@ -12,11 +12,16 @@
     <a href="{% url 'dogs_delete' dog.id %}">delete </a>
 
     <!-- temp element for s3bucket -->
-    {% for picture in dog.picture_set.all %}
+    {% with picture=dog.picture_set.first %}
+        {% if picture %}
+            <img class="responsive-img card-panel" src="{{ picture.url }}">
+        {% else %}
+            <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+        {% endif %}
+    {% endwith %}
+
     <img class="responsive-img card-panel" src="{{ picture.url }}">
-    {% empty %}
-    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-    {% endfor %}
+
 
     <form action="{% url 'add_picture' dog.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
         {% csrf_token %}
