@@ -1,22 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<<<<<<< HEAD
 <h1>Dog Reports</h1>
+=======
+<!-- <form action="" method="GET">
+  <input type="search" name="searched">
+  <input type="submit" value="Search">
+</form> -->
+>>>>>>> bbb1371 (add styling to index)
 
+<h1 class="center-align">Missing Dogs</h1>
+
+<div class="divider"></div>
+<br>
+<br>
+
+<div class="row">
 {% for dog in dogs %}
 {% with picture=dog.picture_set.first %}
   <a href="{% url 'detail' dog.id %}">
-    <div class="card">
+    <div class="col s4">
+      <div class="card card-instance" >
         <div class="card-content">
+<<<<<<< HEAD
             <span class="card-title">{{ dog.name }}</span>
 <<<<<<< HEAD
             <form method="get">
               {{ location.filter.form }}
               <button class="btn" type="submit">Submit</button>
             </form>
+=======
+          <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
+          <span class="card-title">{{ dog.name }}</span>
+          <p>Breed: {{dog.breed}}</p>
+          <p>Location: {{dog.location}}</p>
+          <p>Date Missing: {{dog.date_missing}}</p>
+>>>>>>> bbb1371 (add styling to index)
         </div>
+      </div>
     </div>
   </a>
+<<<<<<< HEAD
+=======
+  {% endfor %}
+</div>
+>>>>>>> bbb1371 (add styling to index)
 
 =======
             <img src="{{ dog.picture_set.first.url }}">

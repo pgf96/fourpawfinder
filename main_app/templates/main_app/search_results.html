@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if searched %}
+    {% for dog in dogs %}
+    <a href="{% url 'detail' dog.id %}">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ dog.name }}</span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+{% else %}
+    <h2>No Results</h2>
+
+{% endblock %}

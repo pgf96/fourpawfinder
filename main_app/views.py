@@ -7,14 +7,11 @@ from django.contrib.auth.decorators import login_required, permission_required, 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Dog, Comment
 from .forms import SignUpForm, CommentForm, DogForm, EditForm
-<<<<<<< HEAD
-=======
 import logging
 import boto3
 import uuid
 import os
 
->>>>>>> 925262d (add custom handler for permission exception)
 
 # Create your views here.
 
@@ -28,19 +25,11 @@ def about(request):
 
 
 def dogs_index(request):
-<<<<<<< HEAD
-    dogs = Dog.objects.filter(user=request.user)
-    return render(request, 'dogs/index.html', {'dogs': dogs})
-
-# @login_required
-
-=======
     dogs = Dog.objects.all()
     return render(request, 'dogs/index.html', {
         'dogs': dogs,
         })
         
->>>>>>> 925262d (add custom handler for permission exception)
 
 @login_required
 # @permission_required('main_app.view_dog', raise_exception=True)
