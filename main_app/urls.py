@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
@@ -14,4 +15,8 @@ urlpatterns = [
     path('dogs/<int:pk>/delete/', views.DogDelete.as_view(), name='dogs_delete'),
     path('dogs/<int:dog_id>/add_comment/', views.add_comment, name='add_comment'),
     path('dogs/<int:dog_id>/delete_comment/<int:comment_id>/',views.delete_comment, name='delete_comment'),
+<<<<<<< HEAD
+=======
+    # path('permission_denied/', views.permission_denied, name='permission_denied')    
+>>>>>>> dc1df6f (remove spacing)
 ]

@@ -4,10 +4,12 @@
 <h1>Dog Reports</h1>
 
 {% for dog in dogs %}
+{% with picture=dog.picture_set.first %}
   <a href="{% url 'detail' dog.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ dog.name }}</span>
+<<<<<<< HEAD
             <form method="get">
               {{ location.filter.form }}
               <button class="btn" type="submit">Submit</button>
@@ -16,6 +18,13 @@
     </div>
   </a>
 
+=======
+            <img src="{{ dog.picture_set.first.url }}">
+            <img src="{{ picture.url }}">
+        </div>
+    </div>
+  </a>
+{% endwith %}
+>>>>>>> dc1df6f (remove spacing)
 {% endfor %}
-
 {% endblock %}
