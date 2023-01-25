@@ -42,5 +42,8 @@ class Comment(models.Model):
 
 
 class Picture(models.Model):
-    key_name = models.CharField(max_length=150)
+    url = models.CharField(max_length=150)
     dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.url
