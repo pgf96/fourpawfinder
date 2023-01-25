@@ -51,8 +51,6 @@ def delete_comment(request, comment_id, dog_id):
         comment.delete()
     return redirect('detail', dog_id=dog_id)
 
-
-
 class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog
     form_class = DogForm
@@ -64,8 +62,7 @@ class DogCreate(LoginRequiredMixin, CreateView):
 
 class DogUpdate(LoginRequiredMixin, UpdateView):
     model = Dog
-    fields = ['description', 'location', 'status']
-
+    form_class = DogForm
 
 class DogDelete(LoginRequiredMixin, DeleteView):
     model = Dog
