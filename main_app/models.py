@@ -5,10 +5,9 @@ from django.utils import timezone
 
 
 # Create your models here.
-
 STATUS = (
     ('NOT FOUND', 'Not Found'),
-    ('FOUND', 'found')
+    ('FOUND', 'Found'),
 )
 
 class Dog(models.Model):
@@ -21,7 +20,7 @@ class Dog(models.Model):
     status = models.CharField(
         max_length=10,
         choices = STATUS,
-        default = STATUS[0][0],
+        default = STATUS[0][0]
         )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
