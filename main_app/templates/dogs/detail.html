@@ -49,6 +49,7 @@
     </div>
 
     <!-- temp element for s3bucket -->
+
     <div class="row">
         <div class="col s6">
             {% for picture in dog.picture_set.all %}
@@ -60,6 +61,7 @@
             {% endfor %}
         </div>
     </div>
+
 
     <form action="{% url 'add_picture' dog.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
         {% csrf_token %}

@@ -14,6 +14,7 @@
 
 <div class="row">
 {% for dog in dogs %}
+{% with picture=dog.picture_set.first %}
   <a href="{% url 'detail' dog.id %}">
     <div class="col s4">
       <div class="card card-instance" >
@@ -23,11 +24,11 @@
           <p>Breed: {{dog.breed}}</p>
           <p>Location: {{dog.location}}</p>
           <p>Date Missing: {{dog.date_missing}}</p>
+
         </div>
       </div>
     </div>
   </a>
   {% endfor %}
 </div>
-
 {% endblock %}
