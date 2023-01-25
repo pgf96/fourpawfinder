@@ -1,11 +1,20 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseNotFound
+from django.core.exceptions import PermissionDenied,ObjectDoesNotExist, ViewDoesNotExist
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import DetailView, ListView
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Dog, Comment
 from .forms import SignUpForm, CommentForm, DogForm, EditForm
+<<<<<<< HEAD
+=======
+import logging
+import boto3
+import uuid
+import os
+
+>>>>>>> 925262d (add custom handler for permission exception)
 
 # Create your views here.
 
@@ -19,20 +28,33 @@ def about(request):
 
 
 def dogs_index(request):
+<<<<<<< HEAD
     dogs = Dog.objects.filter(user=request.user)
     return render(request, 'dogs/index.html', {'dogs': dogs})
 
 # @login_required
 
+=======
+    dogs = Dog.objects.all()
+    return render(request, 'dogs/index.html', {
+        'dogs': dogs,
+        })
+        
+>>>>>>> 925262d (add custom handler for permission exception)
 
 @login_required
+# @permission_required('main_app.view_dog', raise_exception=True)
 def dogs_detail(request, dog_id):
-    dog = Dog.objects.get(id=dog_id)
-    comment_form = CommentForm()
-    return render(request, 'dogs/detail.html', {
-        'dog': dog,
-        'comment_form': comment_form,
-    })
+    try:
+        dog = Dog.objects.get(id=dog_id)
+        comment_form = CommentForm()
+        return render(request, 'dogs/detail.html', {
+            'dog': dog,
+            'comment_form': comment_form,
+        })
+    except ObjectDoesNotExist:
+        return render(request, 'exception_handlers/dog_not_found.html', status=404)
+    
 
 
 # @login_required
@@ -60,11 +82,12 @@ class DogCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-
+    
 
 class DogUpdate(LoginRequiredMixin, UpdateView):
     model = Dog
     form_class = EditForm
+
 
 class DogDelete(LoginRequiredMixin, DeleteView):
     model = Dog
@@ -86,27 +109,18 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
+@login_required
 def add_picture(request, dog_id):
-    # photo-file will be the "name" attribute on the <input type="file">
     picture_file = request.FILES.get('picture-file', None)
     if picture_file:
         s3 = boto3.client('s3')
-        # need a unique "key" for S3 / needs image file extension too
         key = uuid.uuid4().hex[:6] + picture_file.name[picture_file.name.rfind('.'):]
-        # just in case something goes wrong
         try:
             bucket = os.environ['S3_BUCKET']
             s3.upload_fileobj(picture_file, bucket, key)
-            # build the full url string
             url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-            # we can assign to cat_id or cat (if you have a cat object)
             Picture.objects.create(url=url, dog_id=dog_id)
         except Exception as e:
             print('An error occurred uploading file to S3')
             print(e)
     return redirect('detail', dog_id=dog_id)
-
-
-
-
-
