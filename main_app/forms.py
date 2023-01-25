@@ -27,5 +27,11 @@ class CommentForm(ModelForm):
 class DogForm(ModelForm):
     class Meta:
         model = Dog
-        fields = ['name', 'breed', 'age', 'description', 'location', 'date_missing', 'status']
+        fields = ['name', 'breed', 'age', 'description', 'location', 'date_missing']
         widgets = {'date_missing': DateInput(attrs={'type': 'date'})}
+
+class EditForm(ModelForm):
+    class Meta:
+        model = Dog
+        fields = ['age', 'description', 'location', 'status']
+        widgets = {'date_missing': DateInput(attrs={'type':'date'})}
