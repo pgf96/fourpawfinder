@@ -15,5 +15,5 @@ urlpatterns = [
     path('dogs/<int:pk>/delete/', views.DogDelete.as_view(), name='dogs_delete'),
     path('dogs/<int:dog_id>/add_comment/', views.add_comment, name='add_comment'),
     path('dogs/<int:dog_id>/delete_comment/<int:comment_id>/',views.delete_comment, name='delete_comment'),
-    # path('permission_denied/', views.permission_denied, name='permission_denied')    
+    
 ]
