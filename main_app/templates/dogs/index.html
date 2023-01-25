@@ -18,11 +18,11 @@
 
 <div class="row">
 {% for dog in dogs %}
-{% with picture=dog.picture_set.first %}
   <a href="{% url 'detail' dog.id %}">
-    <div class="col s4">
+    <div class="col s4 ">
       <div class="card card-instance" >
         <div class="card-content">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <span class="card-title">{{ dog.name }}</span>
 <<<<<<< HEAD
@@ -32,11 +32,21 @@
             </form>
 =======
           <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
+=======
+          {% if dog.picture_set.first == None %}
+            <img class="responsive-img" src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
+          {% else %}
+            <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
+          {% endif %}
+>>>>>>> 28c3734 (add default img for card)
           <span class="card-title">{{ dog.name }}</span>
           <p>Breed: {{dog.breed}}</p>
           <p>Location: {{dog.location}}</p>
           <p>Date Missing: {{dog.date_missing}}</p>
+<<<<<<< HEAD
 >>>>>>> bbb1371 (add styling to index)
+=======
+>>>>>>> 28c3734 (add default img for card)
         </div>
       </div>
     </div>
