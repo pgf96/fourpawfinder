@@ -26,10 +26,8 @@ def about(request):
 
 def dogs_index(request):
     dogs = Dog.objects.all()
-    return render(request, 'dogs/index.html', {
-        'dogs': dogs,
-        })
-        
+    # picture = Dog.picture_set.()
+    return render(request, 'dogs/index.html', {'dogs': dogs})
 
 @login_required
 # @permission_required('main_app.view_dog', raise_exception=True)
@@ -44,6 +42,7 @@ def dogs_detail(request, dog_id):
     except ObjectDoesNotExist:
         return render(request, 'exception_handlers/dog_not_found.html', status=404)
     
+
 
 
 @login_required
@@ -113,3 +112,13 @@ def add_picture(request, dog_id):
             print('An error occurred uploading file to S3')
             print(e)
     return redirect('detail', dog_id=dog_id)
+    
+
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        # query = form.cleaned_data['query']
+        results = Dog.objects.filter(location__contains=searched)
+        return render(request, 'main_app/search_results.html', {'results': results, 'searched': searched})
+    else:
+        return render(request, 'dogs/index.html')

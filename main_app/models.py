@@ -18,6 +18,7 @@ class Dog(models.Model):
     location = models.CharField(max_length=50)
     date_missing = models.DateField()
     date_created = models.DateTimeField(default=timezone.now)
+
     status = models.CharField(
         max_length=10,
         choices = STATUS,
@@ -28,6 +29,7 @@ class Dog(models.Model):
 
     def __str__(self):
         return self.name
+        return f'{self.get_date_missing_display()} on {self.date}'
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'dog_id': self.id})

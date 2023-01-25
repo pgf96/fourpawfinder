@@ -1,19 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>dogs</h1>
+<!-- <form action="" method="GET">
+  <input type="search" name="searched">
+  <input type="submit" value="Search">
+</form> -->
 
+<h1 class="center-align">Missing Dogs</h1>
+
+<div class="divider"></div>
+<br>
+<br>
+
+<div class="row">
 {% for dog in dogs %}
 {% with picture=dog.picture_set.first %}
   <a href="{% url 'detail' dog.id %}">
-    <div class="card">
+    <div class="col s4">
+      <div class="card card-instance" >
         <div class="card-content">
-            <span class="card-title">{{ dog.name }}</span>
-            <img src="{{ dog.picture_set.first.url }}">
-            <img src="{{ picture.url }}">
+          <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
+          <span class="card-title">{{ dog.name }}</span>
+          <p>Breed: {{dog.breed}}</p>
+          <p>Location: {{dog.location}}</p>
+          <p>Date Missing: {{dog.date_missing}}</p>
+
         </div>
+      </div>
     </div>
   </a>
-{% endwith %}
-{% endfor %}
+  {% endfor %}
+</div>
 {% endblock %}
