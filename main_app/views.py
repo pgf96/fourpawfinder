@@ -83,6 +83,8 @@ class DogDelete(LoginRequiredMixin, DeleteView):
 
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect ('home')
     error_message = ''
     if request.method == 'POST':
         form = SignUpForm(request.POST)
