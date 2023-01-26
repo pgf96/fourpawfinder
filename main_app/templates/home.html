@@ -4,66 +4,81 @@
 <h2><b>Welcome to Four Paw Finder</b> </h2>
 <br>
 <h6><b>Is your dog lost or have you found a lost dog?</b> <br> <br> Four Paw Finder is a place where
-    you can go to connect with your community to help lost dogs get back home.
-    By creating a Missing Report, you can log in and see a collection of dogs that are missing and found.    <br><br><hr />
+  you can go to connect with your community to help lost dogs get back home.
+  By creating a Missing Report, you can log in and see a collection of dogs that are missing and found. <br><br>
+  <hr />
 
-    <H3>Have you seen me?</H3>
-<body>
-    <div class="wrapper">
-        <div class="flex-container">
-            <div class="box one">
-                <a href="">
-                        <div class="card card-instance hoverable" >
-                         <div class="card-content">
-                            {% if dog.picture_set.first == None %}
-                              <img class="responsive-img" src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
-                            {% else %}
-                              <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
-                            {% endif %}
-                            <span class="card-title">{{ dog.name }}</span>
-                            <p>Breed: {{dog.breed}}</p>
-                            <p>Location: {{dog.location}}</p>
-                            <p>Date Missing: {{dog.date_missing}}</p>
-                          </div>
-                      </div>
+  <H3>Have you seen me?</H3>
+
+  <body>
+  
+
+
+    <div class="d-flex flex-row bd-highlight mb-3">
+      <div class="p-2 bd-highlight">
+          <div class="card card-instance hoverable">
+            <div class="card-content">
+              {% if dog.picture_set.first == None %}
+              <a href="/dogs/">
+              <img class="responsive-img"
+                src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
+              </a>
+                {% else %}
+                <a href="/dogs/">
+              <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
                 </a>
+              {% endif %}
+              <span class="card-title">{{ dog.name }}</span>
+              <p>Breed: {{dog.breed}}</p>
+              <p>Location: {{dog.location}}</p>
+              <p>Date Missing: {{dog.date_missing}}</p>
             </div>
-            <div class="box two">
-                <a href="">
-                    <div class="card card-instance hoverable" >
-                     <div class="card-content">
-                        {% if dog.picture_set.first == None %}
-                          <img class="responsive-img" src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
-                        {% else %}
-                          <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
-                        {% endif %}
-                        <span class="card-title">{{ dog.name }}</span>
-                        <p>Breed: {{dog.breed}}</p>
-                        <p>Location: {{dog.location}}</p>
-                        <p>Date Missing: {{dog.date_missing}}</p>
-                      </div>
-                  </div>
+          </div>
+        </a>
+      </div>
+      <div class="p-2 bd-highlight">
+        <div class="card card-instance hoverable">
+          <div class="card-content">
+            {% if dog.picture_set.first == None %}
+            <a href="/dogs/2">
+            <img class="responsive-img"
+              src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
             </a>
-            </div>
-            <div class="box three">
-                <a href="">
-                    <div class="card card-instance hoverable" >
-                     <div class="card-content">
-                        {% if dog.picture_set.first == None %}
-                          <img class="responsive-img" src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
-                        {% else %}
-                          <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
-                        {% endif %}
-                        <span class="card-title">{{ dog.name }}</span>
-                        <p>Breed: {{dog.breed}}</p>
-                        <p>Location: {{dog.location}}</p>
-                        <p>Date Missing: {{dog.date_missing}}</p>
-                      </div>
-                  </div>
-            </a>
-            </div>
+              {% else %}
+              <a href="/dogs/2">
+            <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
+              </a>
+            {% endif %}
+            <span class="card-title">{{ dog.name }}</span>
+            <p>Breed: {{dog.breed}}</p>
+            <p>Location: {{dog.location}}</p>
+            <p>Date Missing: {{dog.date_missing}}</p>
+          </div>
         </div>
+      </a>
+    </div>
+    <div class="p-2 bd-highlight">
+      <div class="card card-instance hoverable">
+        <div class="card-content">
+          {% if dog.picture_set.first == None %}
+          <a href="/dogs/4">
+          <img class="responsive-img"
+            src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
+          </a>
+            {% else %}
+            <a href="/dogs/4">
+          <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
+            </a>
+          {% endif %}
+          <span class="card-title">{{ dog.name }}</span>
+          <p>Breed: {{dog.breed}}</p>
+          <p>Location: {{dog.location}}</p>
+          <p>Date Missing: {{dog.date_missing}}</p>
+        </div>
+      </div>
+    </a>
+  </div>
     </div>
 
     <br>
-{% endblock %}
+    {% endblock %}
