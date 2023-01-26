@@ -191,6 +191,18 @@ table.details>tbody>tr>td {
     height: 300px
 } */
 
+
+h3 {
+   padding: 10px;
+   text-align: center;
+}
+
+.card-header#top-of-comment {
+    background-color: var(--theme-color);
+}
+.card-header#top-of-comment>span {
+    color: white;
+
 .card-img-top {
     width: 100%;
     height: 10vw;
@@ -208,3 +220,47 @@ table.details>tbody>tr>td {
 .card-header#top-of-comment>span {
     color: white;
 }
+
+.wrapper {
+    width: 100%;
+    max-width: 960px;
+    height: 100%;
+    max-height: 500px;
+    margin: 0 auto;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    gap: 10x;
+    background: black;
+}
+
+.box {
+    height: 300px;
+    min-width: 100px;
+    background: white;
+    flex-grow: 1;
+}
+
+.one {
+    background: blue;
+}
+
+.two {
+    background: yellow;
+}
+
+.three {
+    background: green;
+}
+
+@media (max-width: 800px) {
+    .flex-container {
+      flex-direction: column;
+    }
+  }
