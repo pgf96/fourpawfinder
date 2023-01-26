@@ -21,9 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_app.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-<<<<<<< HEAD
    # path ('', BootstrapFilterView, name='bootstrap'),
 ]
-=======
-]
->>>>>>> 5963873 (add date created field to Dog)
