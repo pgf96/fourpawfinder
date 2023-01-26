@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<h1 class="center-align">{{ dog.name }}</h1>
+<h1>{{ dog.name }}</h1>
 <div class="divider"></div>
 <br>
 <div class="container text-center main-picture">
@@ -20,9 +20,9 @@
         </div>
 </div>
 
+<p><span id="dog-status">{{dog.status}}</span></p>
 <div class="container details-container shadow p-3 mb-5 bg-white rounded">
     <div id="details">
-        <p><span id="dog-status">{{dog.status}}</span></p>
         <div class="card-panel detail-panel">
             <table class="table details">
                 <tbody>
@@ -49,16 +49,11 @@
                 <p> {{dog.description}}</p>
             </div>
             {% if dog.user == user %}
-            <div class="edit-delete">
-                {{ dog.user }}
-                <a href="{% url 'dogs_update' dog.id %}">edit </a>
-                <a href="{% url 'dogs_delete' dog.id %}">delete </a>
-            </div>
             {% endif %}
         </div>
-    
+        
         <!-- temp element for s3bucket -->
-    
+        
         <div class="row">
             <div class="col s6">
                 {% for picture in dog.picture_set.all %}
@@ -68,6 +63,11 @@
                 {% empty %}
                 <div class="card-panel center-align">No Photos Uploaded</div>
                 {% endfor %}
+                <div class="edit-delete">
+                    {{ dog.user }}
+                    <a href="{% url 'dogs_update' dog.id %}">edit </a>
+                    <a href="{% url 'dogs_delete' dog.id %}">delete </a>
+                </div>
             </div>
         </div>
     
@@ -76,7 +76,7 @@
             {% csrf_token %}
             <input type="file" name="picture-file">
             <br><br>
-            <input type="submit" class="btn indigo lighten-3" value="Upload picture">
+            <input type="submit" class="btn btn-primary" value="Upload picture">
         </form>
         {% endif %}
     </div>
