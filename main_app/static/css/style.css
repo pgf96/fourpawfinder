@@ -68,6 +68,13 @@ img.main-picture {
     padding-bottom: 18px;
 }
 
+.comment-container {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+
+
 h1{
     font-size: 70px;
     padding: 10px 0 0 20px;
@@ -183,6 +190,17 @@ table.details>tbody>tr>td {
 /* .card-instance{
     height: 300px
 } */
+
+.card-img-top {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}
+
+.comment-container>.card {
+    --bs-card-border-radius: none ;
+    --bs-card-inner-border-radius: none;
+}
 
 .card-header#top-of-comment {
     background-color: var(--theme-color);
