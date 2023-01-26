@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Dog, Comment
+from .models import Dog, Comment, Picture
 from .forms import SignUpForm, CommentForm, DogForm, EditForm
 import logging
 import boto3
@@ -26,10 +26,8 @@ def about(request):
 
 def dogs_index(request):
     dogs = Dog.objects.all()
-    return render(request, 'dogs/index.html', {
-        'dogs': dogs,
-        })
-        
+    # picture = Dog.picture_set.()
+    return render(request, 'dogs/index.html', {'dogs': dogs})
 
 @login_required
 # @permission_required('main_app.view_dog', raise_exception=True)
@@ -115,3 +113,13 @@ def add_picture(request, dog_id):
             print('An error occurred uploading file to S3')
             print(e)
     return redirect('detail', dog_id=dog_id)
+    
+
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        # query = form.cleaned_data['query']
+        results = Dog.objects.filter(location__contains=searched)
+        return render(request, 'main_app/search_results.html', {'results': results, 'searched': searched})
+    else:
+        return render(request, 'dogs/index.html')

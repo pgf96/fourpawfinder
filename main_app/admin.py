@@ -8,3 +8,15 @@ admin.site.register(Comment)
 admin.site.register(Location)
 admin.site.register(State)
 admin.site.register(City)
+from .models import Dog, Comment
+
+admin.site.register(Dog)
+admin.site.register(Comment)
+
+admin.site.register(Dog)
+admin.site.register(Comment)
+admin.site.register(Location)
+admin.site.register(State)
+admin.site.register(City)
+admin.site.register(Dog)
+admin.site.register(Comment)

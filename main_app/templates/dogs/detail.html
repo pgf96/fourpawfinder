@@ -2,40 +2,6 @@
 {% block content %}
 
 
-<<<<<<< HEAD
-<div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <p>Name: <b>{{ dog.name }}</b> </p>
-    <p>Breed:  <b>{{ dog.breed }}</b> </p>
-    <p>Age (yrs):  <b>{{ dog.age }}</b> </p>
-    <p>Description:  <b>{{ dog.description }}</b> </p>
-    <p>Location:  <b>{{ dog.location }}</b> </p>
-    <p>Date Missing:  <b>{{ dog.date_missing }}</b> </p>
-=======
-=======
->>>>>>> afc39b2 (add status to template)
-    <p><span class="purple-text" id="dog-status">{{dog.status}}</span></p>
-    <p>{{ dog.name }} </p>
-    <p>{{ dog.location }} </p>
-    <p>{{ dog.description }} </p>
->>>>>>> 581d3b4 (add status to template)
-    {{ dog.user }}
-    <a href="{% url 'dogs_update' dog.id %}">edit </a>
-    <a href="{% url 'dogs_delete' dog.id %}">delete </a>
-
-    <!-- temp element for s3bucket -->
-    {% with picture=dog.picture_set.first %}
-        {% if picture %}
-            <img class="responsive-img card-panel" src="{{ picture.url }}">
-        {% else %}
-            <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-        {% endif %}
-    {% endwith %}
-
-    <img class="responsive-img card-panel" src="{{ picture.url }}">
-
-=======
 <h1 class="center-align">{{ dog.name }}</h1>
 <div class="divider"></div>
 <br>
@@ -83,53 +49,61 @@
     </div>
 
     <!-- temp element for s3bucket -->
+
     <div class="row">
         <div class="col s6">
             {% for picture in dog.picture_set.all %}
             {% if picture != dog.picture_set.first %}
-            <img class="responsive-img card-panel center-align" src="{{ picture.url }}">
+            <img class="responsive-img card-panel indigo-text lighten-3 center-align" src="{{ picture.url }}">
             {% endif %}
             {% empty %}
-            <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+            <div class="card-panel center-align">No Photos Uploaded</div>
             {% endfor %}
         </div>
     </div>
->>>>>>> bbb1371 (add styling to index)
 
+    {% if user == dog.user %}
     <form action="{% url 'add_picture' dog.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
         {% csrf_token %}
         <input type="file" name="picture-file">
         <br><br>
-        <input type="submit" class="btn" value="Upload picture">
+        <input type="submit" class="btn indigo lighten-3" value="Upload picture">
     </form>
+    {% endif %}
 
 </div>
-
+<br>
+<div class="comment-title">Comments</div>
 <ul>
     {% for comment in dog.comment_set.all %}
         <div class="card">
-            <div class="card-content">
-            <div>
+            <div class="card-content comment-card">
+                <div>
+                    <div id="comment-first-line">
+                    <span class="username">{{comment.user.username}}</span>
+                    <span id="date-comment">{{ comment.date_created }}</span>
+                    </div>
+                </div>
+                <div>
                 {{ comment.content }}
-                <span id="user-comment">{{ comment.user.username }}</span>
             </div>
-            <p>{{ comment.date_created}}</p>
-            <form method="POST" action="{% url 'delete_comment' comment.dog.id comment.id %}">
-                {% csrf_token %}<input type="submit" value="DELETE">
+            <form method="POST" action="{% url 'delete_comment' comment.dog.id comment.id %}" class="right-align">
+                {% csrf_token %}<input type="submit" value="Delete" id="comment-delete">
             </form>
-            <br>
             </div>
         </div>
     {% endfor %}
 
 </ul>
 
-
-
-<form action="{% url 'add_comment' dog.id %}" method="POST">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <input type="submit" class="btn" value="Add Comment">
-</form>
+<div class="">
+    <div class="comment-form">
+        <form action="{% url 'add_comment' dog.id %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <div class="center add-comment"><input type="submit" class="btn indigo lighten-3" value="Add Comment"></div>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

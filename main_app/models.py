@@ -21,7 +21,7 @@ class Dog(models.Model):
 =======
     date_missing = models.DateField()
     date_created = models.DateTimeField(default=timezone.now)
->>>>>>> 5963873 (add date created field to Dog)
+
     status = models.CharField(
         max_length=10,
         choices = STATUS,
@@ -51,24 +51,3 @@ class Picture(models.Model):
 
     def __str__(self):
         return self.url
-
-
-
-class State(models.Model):
-    name = models.CharField(max_length=70)
-
-    def __str__(self):
-        return self.name
- 
-class City(models.Model):
-    name = models.CharField(max_length=70)
-
-    def __str__(self):
-        return self.name
-
-class Location(models.Model):
-    state = models.CharField(max_length=70) # (State, on_delete=models.CASCADE),
-    city = models.CharField(max_length=70)
-
-    def __str__(self):
-        return self
