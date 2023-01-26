@@ -7,24 +7,34 @@
 <br>
 <br>
 
-<div class="row">
-{% for dog in dogs %}
-  <a href="{% url 'detail' dog.id %}">
-    <div class="col s4 ">
-      <div class="card card-instance hoverable" >
-        <div class="card-content">
-          {% if dog.picture_set.first == None %}
-            <img class="responsive-img" src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
-          {% else %}
-            <img class="responsive-img" src="{{ dog.picture_set.first.url }}">
-          {% endif %}
-          <span class="card-title">{{ dog.name }}</span>
-          <p>Breed: {{dog.breed}}</p>
-          <p>Location: {{dog.location}}</p>
-          <p>Date Missing: {{dog.date_missing}}</p>
+
+<div class="container">
+  <div class="card-group">
+
+    <div class="row">
+      {% for dog in dogs %}
+        <div class="col-4 justify-content-center">
+          <div class="card">
+            {% if dog.picture_set.first == None %}
+            <a href="{% url 'detail' dog.id %}">
+              <img src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png" alt="..." class="card-img-top">
+            </a>
+            {% else %}
+            <a href="{% url 'detail' dog.id %}">
+              <img src="{{ dog.picture_set.first.url }}" alt="..." class="card-img-top">
+            </a>
+            {% endif %}
+            <div class="card-body">
+              <h2 class="card-title"> {{ dog.name }}</h5>
+              <p class="card-text"> Breed: {{dog.name }} </p>
+              <p class="card-text"> Location: {{dog.name }} </p>
+              <p class="card-text"> Date Missing: {{dog.name }} </p>
+            </div>
+          </div>
         </div>
-      </div>
+      {% endfor %}
     </div>
-  </a>
-{% endfor %}
+  </div>
+</div>
+
 {% endblock %}
