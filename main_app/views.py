@@ -44,8 +44,7 @@ def dogs_detail(request, dog_id):
     
 
 
-
-@login_required
+# @login_required
 def add_comment(request, dog_id):
     form = CommentForm(request.POST)
     if form.is_valid():

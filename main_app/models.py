@@ -16,6 +16,9 @@ class Dog(models.Model):
     age = models.IntegerField()
     description = models.TextField(max_length=250)
     location = models.CharField(max_length=50)
+<<<<<<< HEAD
+    date_missing = models.DateField('date missing')
+=======
     date_missing = models.DateField()
     date_created = models.DateTimeField(default=timezone.now)
 
@@ -33,8 +36,6 @@ class Dog(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'dog_id': self.id})
-
-    # ordering = ['-date']
 
 
 class Comment(models.Model):
