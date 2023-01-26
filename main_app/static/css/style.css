@@ -3,15 +3,16 @@
 }
 
 * {
-    font-family: 'Hind', sans-serif;
+    font-family: 'Comfortaa', cursive;
+
 }
 
 body {
-    background-color: #e8eaf6;
+    background-color: #eceff1;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    color: #9fa8da
+    color: #9fa8da;
 }
 
 
@@ -78,11 +79,14 @@ img.main-picture {
 h1{
     font-size: 70px;
     padding: 10px 0 0 20px;
+    text-align: center;
 }
 
 label{
     font-size: 17px !important;
 }
+
+/* --------details page---------- */
 
 .main-pic{
     margin-left: 76%;
@@ -124,6 +128,8 @@ table.details>tbody>tr>td {
     text-align: right;
 }
 
+/* ---------comment form--------- */
+
 .comment-title{
     font-size: 23px;
     text-align: center;
@@ -142,7 +148,7 @@ table.details>tbody>tr>td {
 
 .username{
     font-size: 20px;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 #date-comment{
@@ -202,6 +208,9 @@ h3 {
 }
 .card-header#top-of-comment>span {
     color: white;
+<<<<<<< HEAD
+}
+=======
 
 }
 
@@ -266,3 +275,4 @@ h3 {
       flex-direction: column;
     }
   }
+>>>>>>> main

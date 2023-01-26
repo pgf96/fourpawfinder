@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<h1 class="center-align">{{ dog.name }}</h1>
+<h1>{{ dog.name }}</h1>
 <div class="divider"></div>
 <br>
 <div class="container text-center main-picture">
@@ -22,7 +22,6 @@
 
 <div class="container details-container shadow p-3 mb-5 bg-white ">
     <div id="details">
-        <p><span id="dog-status">{{dog.status}}</span></p>
         <div class="card-panel detail-panel">
             <table class="table details">
                 <tbody>
@@ -49,14 +48,9 @@
                 <p> {{dog.description}}</p>
             </div>
             {% if dog.user == user %}
-            <div class="edit-delete">
-                {{ dog.user }}
-                <a href="{% url 'dogs_update' dog.id %}">edit </a>
-                <a href="{% url 'dogs_delete' dog.id %}">delete </a>
-            </div>
             {% endif %}
         </div>
-    
+        
         <!-- temp element for s3bucket -->
 
         <div class="row">
