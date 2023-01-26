@@ -31,8 +31,6 @@ class Dog(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'dog_id': self.id})
 
-    # ordering = ['-date']
-
 
 class Comment(models.Model):
     content = models.CharField(max_length=300)
@@ -47,3 +45,24 @@ class Picture(models.Model):
 
     def __str__(self):
         return self.url
+
+
+
+class State(models.Model):
+    name = models.CharField(max_length=70)
+
+    def __str__(self):
+        return self.name
+ 
+class City(models.Model):
+    name = models.CharField(max_length=70)
+
+    def __str__(self):
+        return self.name
+
+class Location(models.Model):
+    state = models.CharField(max_length=70) # (State, on_delete=models.CASCADE),
+    city = models.CharField(max_length=70)
+
+    def __str__(self):
+        return self

@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>dogs</h1>
+<h1>Dog Reports</h1>
 
 {% for dog in dogs %}
   <a href="{% url 'detail' dog.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ dog.name }}</span>
+            <form method="get">
+              {{ location.filter.form }}
+              <button class="btn" type="submit">Submit</button>
+            </form>
         </div>
     </div>
   </a>
+
 {% endfor %}
 
 {% endblock %}
