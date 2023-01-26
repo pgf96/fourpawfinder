@@ -19,8 +19,29 @@ main {
     flex: 1 0 auto;
 }
 
+header {
+    color: var(--theme-color);
+}
+
 nav {
-    background-color: var(--theme-color)
+    background-color: var(--theme-color);
+    font-size: 18px;
+}
+
+.nav-item > .nav-link {
+    color: white;
+}
+
+
+.navbar-brand.title {
+    color: white;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.navbar {
+    font-size: 19px;
+
 }
 
 footer.page-footer {
@@ -38,6 +59,14 @@ img{
     height: 100%;
     object-fit:cover;
 }
+img.main-picture {
+    padding: 30px;
+    background-color: white;
+}
+
+.container.main-picture {
+    padding-bottom: 18px;
+}
 
 h1{
     font-size: 70px;
@@ -54,6 +83,10 @@ label{
 
 #details{
     font-size: 20px;
+}
+
+table.details>tbody>tr>td {
+    color: var(--theme-color);
 }
 
 #dog-status{
@@ -120,10 +153,28 @@ label{
     margin-top: 5px;
 }
 
+.asteriskField {
+    display: none;
+}
+
+.btn-primary {
+    border-color: #9fa8da;
+    background-color: #9fa8da;
+}
+.btn-primary:hover {
+    border-color: #9fa8da;
+    background-color: #9fa8da;
+}
+
+.description {
+    text-align: center;
+}
+
 #comment-delete{
     color: #9fa8da;
     background-color: white;
     border: none;
+    float: right;
 }
 
 #comment-delete:hover{
@@ -133,6 +184,63 @@ label{
     height: 300px
 } */
 
+
+.wrapper {
+    width: 100%;
+    max-width: 960px;
+    height: 100%;
+    max-height: 500px;
+    margin: 0 auto;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    gap: 10x;
+    background: black;
+}
+
+.box {
+    height: 300px;
+    min-width: 100px;
+    background: white;
+    flex-grow: 1;
+}
+
+.one {
+    background: blue;
+}
+
+.two {
+    background: yellow;
+}
+
+.three {
+    background: green;
+}
+
+@media (max-width: 800px) {
+    .flex-container {
+      flex-direction: column;
+    }
+  }
+.card-header#top-of-comment {
+    background-color: var(--theme-color);
+}
+.card-header#top-of-comment>span {
+    color: white;
+}
+
+.card-header#top-of-comment {
+    background-color: var(--theme-color);
+}
+.card-header#top-of-comment>span {
+    color: white;
+}
 
 .wrapper {
     width: 100%;
