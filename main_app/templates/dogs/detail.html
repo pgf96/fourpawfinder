@@ -62,31 +62,12 @@
         <div class="row">
             {% for picture in dog.picture_set.all %}
             <div class="col-4">
-                {% if picture != dog.picture_set.first  %}
-                <img class="img-fluid" src="{{ picture.url }}">
-                {% endif %}
+            {% if picture != dog.picture_set.first  %}
+            <img class="img-fluid" src="{{ picture.url }}">
+            {% endif %}
             </div>
             {% endfor %}
-            {% if dog.picture_set.first.url != None %}
-            <img class="img-fluid" src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
-            {% endif %}
 
-        </div>
-
-        
-    
-
-
-        <div class="row">
-            <div class="col-4">
-                <img class="img-fluid" src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
-            </div>
-            <div class="col-4">
-                <img class="img-fluid" src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
-            </div>
-            <div class="col-4">
-                <img class="img-fluid" src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
-            </div>
         </div>
     
         {% if user == dog.user %}
