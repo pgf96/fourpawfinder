@@ -54,49 +54,56 @@
         <div class="col s6">
             {% for picture in dog.picture_set.all %}
             {% if picture != dog.picture_set.first %}
-            <img class="responsive-img card-panel center-align" src="{{ picture.url }}">
+            <img class="responsive-img card-panel indigo-text lighten-3 center-align" src="{{ picture.url }}">
             {% endif %}
             {% empty %}
-            <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+            <div class="card-panel center-align">No Photos Uploaded</div>
             {% endfor %}
         </div>
     </div>
 
-
+    {% if user == dog.user %}
     <form action="{% url 'add_picture' dog.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
         {% csrf_token %}
         <input type="file" name="picture-file">
         <br><br>
-        <input type="submit" class="btn" value="Upload picture">
+        <input type="submit" class="btn indigo lighten-3" value="Upload picture">
     </form>
+    {% endif %}
 
 </div>
-
+<br>
+<div class="comment-title">Comments</div>
 <ul>
     {% for comment in dog.comment_set.all %}
         <div class="card">
-            <div class="card-content">
-            <div>
+            <div class="card-content comment-card">
+                <div>
+                    <div id="comment-first-line">
+                    <span class="username">{{comment.user.username}}</span>
+                    <span id="date-comment">{{ comment.date_created }}</span>
+                    </div>
+                </div>
+                <div>
                 {{ comment.content }}
-                <span id="user-comment">{{ comment.user.username }}</span>
             </div>
-            <p>{{ comment.date_created}}</p>
-            <form method="POST" action="{% url 'delete_comment' comment.dog.id comment.id %}">
-                {% csrf_token %}<input type="submit" value="DELETE">
+            <form method="POST" action="{% url 'delete_comment' comment.dog.id comment.id %}" class="right-align">
+                {% csrf_token %}<input type="submit" value="Delete" id="comment-delete">
             </form>
-            <br>
             </div>
         </div>
     {% endfor %}
 
 </ul>
 
-
-
-<form action="{% url 'add_comment' dog.id %}" method="POST">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <input type="submit" class="btn" value="Add Comment">
-</form>
+<div class="">
+    <div class="comment-form">
+        <form action="{% url 'add_comment' dog.id %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <div class="center add-comment"><input type="submit" class="btn indigo lighten-3" value="Add Comment"></div>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
