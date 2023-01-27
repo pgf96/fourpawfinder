@@ -29,7 +29,7 @@ def dogs_index(request):
     # picture = Dog.picture_set.()
     return render(request, 'dogs/index.html', {'dogs': dogs})
 
-@login_required
+# @login_required
 # @permission_required('main_app.view_dog', raise_exception=True)
 def dogs_detail(request, dog_id):
     try:
