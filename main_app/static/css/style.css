@@ -7,11 +7,11 @@
 }
 
 body {
-    background-color: #ECEFF1;
+    background-color: #e8eaf6;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    color: #9fa8da
+    color: #9fa8da;
 }
 
 
@@ -82,12 +82,15 @@ img.main-picture {
 
 h1{
     font-size: 70px;
-    padding: 10px 0 0 20px;
+    padding: 50px 0 0 20px;
+    text-align: center;
 }
 
 label{
     font-size: 17px !important;
 }
+
+/* --------details page---------- */
 
 .main-pic{
     margin-left: 76%;
@@ -129,6 +132,8 @@ table.details>tbody>tr>td {
     text-align: right;
 }
 
+/* ---------comment form--------- */
+
 .comment-title{
     font-size: 23px;
     text-align: center;
@@ -147,7 +152,7 @@ table.details>tbody>tr>td {
 
 .username{
     font-size: 20px;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 #date-comment{
@@ -196,9 +201,6 @@ table.details>tbody>tr>td {
     height: 300px
 } */
 
-h2 {
-    font-size: 50px;
-}
 
 h3 {
    padding: 10px;
@@ -235,5 +237,14 @@ h5{
 }
 .card-header#top-of-comment>span {
     color: white;
+}
+
+.card-line{
+    font-size: 18px;
+    margin: 5px 0 0 0;
+}
+
+.card-row{
+    padding-bottom: 10px;
 }
 
