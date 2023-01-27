@@ -110,14 +110,18 @@
     </div>
     {% endfor %}
 </div>
-<div class="container comment-add-container">
-    <div class="comment-form">
-        <form action="{% url 'add_comment' dog.id %}" method="POST">
-            {% csrf_token %}
-            {{ comment_form|crispy }}
-                <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+{% if user.is_authenticated %}
+<div id="form-comment">
+    <div class="container comment-add-container">
+        <div class="comment-form">
+            <form action="{% url 'add_comment' dog.id %}" method="POST">
+                {% csrf_token %}
+                {{ comment_form|crispy }}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
 </div>
+{% endif %}
 
 {% endblock %}

@@ -47,8 +47,7 @@ INSTALLED_APPS = [
     
 ]
 
-import django_on_heroku
-django_on_heroku.settings(locals())
+
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -142,3 +141,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+import django_on_heroku
+django_on_heroku.settings(locals())
