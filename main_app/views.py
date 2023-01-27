@@ -65,11 +65,12 @@ def add_comment(request, dog_id):
 @login_required
 def delete_comment(request, comment_id, dog_id):
     comment = Comment.objects.get(id=comment_id, dog_id=dog_id)
-    # if user != user who made the post. else give unauthorized access message
-    
-    if request.method == 'POST':
-        comment.delete()
-    return redirect('detail', dog_id=dog_id)
+    if request.user != comment.user:
+        raise PermissionDenied
+    else:
+        if request.method == 'POST':
+            comment.delete()
+        return redirect('detail', dog_id=dog_id)
 
 class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog
@@ -109,20 +110,30 @@ def signup(request):
 
 @login_required
 def add_picture(request, dog_id):
-    picture_file = request.FILES.get('picture-file', None)
-    if picture_file:
-        s3 = boto3.client('s3')
-        key = uuid.uuid4().hex[:6] + picture_file.name[picture_file.name.rfind('.'):]
-        try:
-            bucket = os.environ['S3_BUCKET']
-            s3.upload_fileobj(picture_file, bucket, key)
-            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-            Picture.objects.create(url=url, dog_id=dog_id)
-        except Exception as e:
-            print('An error occurred uploading file to S3')
-            print(e)
-    return redirect('detail', dog_id=dog_id)
-    
+    dog = Dog.objects.get(id=dog_id)
+    if request.user.is_authenticated and request.user == dog.user:
+        picture_file = request.FILES.get('picture-file', None)
+        if picture_file:
+            s3 = boto3.client('s3')
+            key = uuid.uuid4().hex[:6] + picture_file.name[picture_file.name.rfind('.'):]
+            try:
+                bucket = os.environ['S3_BUCKET']
+                s3.upload_fileobj(picture_file, bucket, key)
+                url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+                Picture.objects.create(url=url, dog_id=dog_id)
+            except Exception as e:
+                print('An error occurred uploading file to S3')
+                print(e)
+        # print(request.META['REMOTE_ADDR'])
+        # print(request.META.get('HTTP_X_REAL_IP'))
+        # print(request.META.get('HTTP_X_FORWARDED_FOR'))
+        return redirect('detail', dog_id=dog_id)
+    else:
+        # print(request.META['REMOTE_ADDR'])
+        # print(request.META.get('HTTP_X_REAL_IP'))
+        # print(request.META.get('HTTP_X_FORWARDED_FOR'))
+        return redirect('detail', dog_id=dog_id)
+
 
 def search(request):
     if request.method == "POST":
