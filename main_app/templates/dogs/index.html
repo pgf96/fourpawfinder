@@ -11,7 +11,7 @@
   <div class="card-group">
     <div class="row">
       {% for dog in dogs %}
-        <div class="col-4 justify-content-center card-row">
+        <div class="col-4 justify-content-center card-row index-card">
           <div class="card">
             {% if dog.picture_set.first == None %}
             <a href="{% url 'detail' dog.id %}">
