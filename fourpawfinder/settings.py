@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     
 ]
 
+import django_on_heroku
+django_on_heroku.settings(locals())
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
