@@ -76,8 +76,8 @@
         {% if dog.user == user %}
             <div class="edit-delete">
                 {{ dog.user }}
-                <a href="{% url 'dogs_update' dog.id %}">edit </a>
-                <a href="{% url 'dogs_delete' dog.id %}">delete </a>
+                <a href="{% url 'dogs_update' dog.id %}" class="btn post-delete">edit </a>
+                <a href="{% url 'dogs_delete' dog.id %}" class="btn post-delete">delete </a>
             </div>
         {% endif %}
         {% endif %}

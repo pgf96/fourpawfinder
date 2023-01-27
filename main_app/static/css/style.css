@@ -167,6 +167,32 @@ table.details>tbody>tr>td {
     text-align: right;
 }
 
+.post-delete{
+    color: #9fa8da;
+    background-color: white;
+    padding: 0;
+}
+
+.post-delete:hover{
+    color:#c5cae9;
+}
+
+/* ------------confirm delete page--------- */
+
+.delete-h2{
+    text-align: center;
+    font-size: 40px;
+}
+
+#confirm-delete{
+    font-size: 60px;
+    text-align: center;
+}
+
+.btn-delete{
+    font-size: 30px;
+}
+
 /* ---------comment form--------- */
 
 .comment-title{
