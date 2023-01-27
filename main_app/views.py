@@ -11,13 +11,22 @@ import logging
 import boto3
 import uuid
 import os
+from itertools import islice
+
 
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'home.html')
+    dogs = Dog.objects.all()
+    dog1, dog2, dog3 = (dog for i, dog in enumerate(islice(dogs, 3)) )
+    context = {
+        'dog1': dog1,
+        'dog2': dog2,
+        'dog3': dog3,      
+    }
+    return render(request, 'home.html', context)
 
 
 def about(request):
@@ -26,7 +35,6 @@ def about(request):
 
 def dogs_index(request):
     dogs = Dog.objects.all()
-    # picture = Dog.picture_set.()
     return render(request, 'dogs/index.html', {'dogs': dogs})
 
 # @login_required
@@ -58,6 +66,7 @@ def add_comment(request, dog_id):
 def delete_comment(request, comment_id, dog_id):
     comment = Comment.objects.get(id=comment_id, dog_id=dog_id)
     # if user != user who made the post. else give unauthorized access message
+    
     if request.method == 'POST':
         comment.delete()
     return redirect('detail', dog_id=dog_id)
