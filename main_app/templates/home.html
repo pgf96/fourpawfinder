@@ -16,65 +16,71 @@
 
 
     <div class="d-flex flex-row bd-highlight mb-3">
-      <div class="p-2 bd-highlight">
+      <div class="p-2 bd-highlight home-cards">
           <div class="card card-instance hoverable">
             <div class="card-content">
               {% if dog1.picture_set.first == None %}
               <a href="/dogs/{{dog1.id}}">
-              <img class="responsive-img"
+              <img class="responsive-img card-img-top"
                 src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
               </a>
                 {% else %}
                 <a href="/dogs/{{dog1.id}}">
-              <img class="responsive-img" src="{{ dog1.picture_set.first.url }}">
+              <img class="responsive-img card-img-top" src="{{ dog1.picture_set.first.url }}">
                 </a>
               {% endif %}
-              <span class="card-title">{{ dog.name }}</span>
-              <p>Breed: {{dog1.breed}}</p>
-              <p>Location: {{dog1.location}}</p>
-              <p>Date Missing: {{dog1.date_missing}}</p>
+              <div class="card-body card-content">
+              <h2 class="card-title"> {{ dog1.name }}</h2>
+              <p class="card-line">Breed: {{dog1.breed}}</p>
+              <p class="card-line">Location: {{dog1.location}}</p>
+              <p class="card-line">Date Missing: {{dog1.date_missing}}</p>
+              </div>
             </div>
           </div>
         </a>
       </div>
-      <div class="p-2 bd-highlight">
+      <div class="p-2 bd-highlight home-cards">
         <div class="card card-instance hoverable">
           <div class="card-content">
             {% if dog2.picture_set.first == None %}
             <a href="/dogs/{{dog2.id}}">
-            <img class="responsive-img"
+            <img class="responsive-img card-img-top"
               src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
             </a>
               {% else %}
               <a href="/dogs/{{dog2.id}}">
-            <img class="responsive-img" src="{{ dog2.picture_set.first.url }}">
-              </a>
+            <img class="responsive-img card-img-top" src="{{ dog2.picture_set.first.url }}">
+            </a>
             {% endif %}
-            <span class="card-title">{{ dog2.name }}</span>
-            <p>Breed: {{dog2.breed}}</p>
-            <p>Location: {{dog2.location}}</p>
-            <p>Date Missing: {{dog2.date_missing}}</p>
+            <div class="card-body card-content">
+            <h2 class="card-title"> {{ dog2.name }}</h2>
+            <p class="card-line">Breed: {{dog2.breed}}</p>
+            <p class="card-line">Location: {{dog2.location}}</p>
+            <p class="card-line">Date Missing: {{dog2.date_missing}}</p>
+            </div>
           </div>
         </div>
       </a>
     </div>
-    <div class="p-2 bd-highlight">
-      <div class="card card-instance hoverable">
-        <div class="card-content">
+    <div class="p-2 bd-highlight home-cards">
+      <div class="card-instance hoverable">
+        <div class="card">
           {% if dog3.picture_set.first == None %}
           <a href="/dogs/{{dog3.id}}">
-          <img class="responsive-img"
+          <img class="responsive-img card-img-top"
             src="https://www.pngkit.com/png/detail/152-1527350_dog-and-cat-silhouette-silhouette.png">
           </a>
             {% else %}
             <a href="/dogs/{{dog3.id}}">
-          <img class="responsive-img" src="{{ dog3.picture_set.first.url }}">
+          <img class="responsive-img card-img-top" src="{{ dog3.picture_set.first.url }}">
             </a>
           {% endif %}
-          <span class="card-title">{{ dog3.name }}</span>
-          <p>Breed: {{dog3.breed}}</p>
-          <p>Location: {{dog3.location}}</p>
-          <p>Date Missing: {{dog3.date_missing}}</p>
+          <div class="card-body card-content">
+          <h2 class="card-title"> {{ dog3.name }}</h2>
+          <p class="card-line">Breed: {{dog3.breed}}</p>
+          <p class="card-line">Location: {{dog3.location}}</p>
+          <p class="card-line">Date Missing: {{dog3.date_missing}}</p>
+          </div>
         </div>
       </div>
     </a>
