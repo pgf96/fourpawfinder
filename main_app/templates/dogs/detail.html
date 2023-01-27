@@ -14,7 +14,6 @@
                     {% if dog.picture_set.first.url != None %}
                     <img src="{{dog.picture_set.first.url}}" class="rounded mx-auto d-block main-picture">
                     {% endif %}
-
                 </div>
             </div>
         </div>
@@ -47,19 +46,17 @@
                 <p class="description"> Description</p>
                 <p> {{dog.description}}</p>
             </div>
-            {% if dog.user == user %}
-            {% endif %}
         </div>
         
         <!-- temp element for s3bucket -->
 
         <div class="row">
             {% for picture in dog.picture_set.all %}
-            <div class="col-4">
             {% if picture != dog.picture_set.first  %}
+            <div class="col-4">
             <img class="img-fluid" src="{{ picture.url }}">
-            {% endif %}
             </div>
+            {% endif %}
             {% endfor %}
 
         </div>
@@ -71,6 +68,13 @@
             <br><br>
             <button type="submit" class="btn btn-primary">Upload Image</button>
         </form>
+        {% if dog.user == user %}
+            <div class="edit-delete">
+                {{ dog.user }}
+                <a href="{% url 'dogs_update' dog.id %}">edit </a>
+                <a href="{% url 'dogs_delete' dog.id %}">delete </a>
+            </div>
+        {% endif %}
         {% endif %}
     </div>
 </div>

@@ -13,7 +13,7 @@
 
     <div class="row">
       {% for dog in dogs %}
-        <div class="col-4 justify-content-center">
+        <div class="col-4 justify-content-center card-row">
           <div class="card">
             {% if dog.picture_set.first == None %}
             <a href="{% url 'detail' dog.id %}">
@@ -24,11 +24,11 @@
               <img src="{{ dog.picture_set.first.url }}" alt="..." class="card-img-top">
             </a>
             {% endif %}
-            <div class="card-body">
+            <div class="card-body card-content">
               <h2 class="card-title"> {{ dog.name }}</h5>
-              <p class="card-text"> Breed: {{dog.name }} </p>
-              <p class="card-text"> Location: {{dog.name }} </p>
-              <p class="card-text"> Date Missing: {{dog.name }} </p>
+              <p class="card-line"> Breed: {{dog.breed }} </p>
+              <p class="card-line"> Location: {{dog.location }} </p>
+              <p class="card-line"> Date Missing: {{dog.date_missing }} </p>
             </div>
           </div>
         </div>
