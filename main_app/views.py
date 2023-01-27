@@ -1,22 +1,15 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseNotFound
-from django.core.exceptions import PermissionDenied,ObjectDoesNotExist, ViewDoesNotExist
+from django.core.exceptions import PermissionDenied,ObjectDoesNotExist
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.contrib.auth.decorators import login_required, permission_required,
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Dog, Comment, Picture
 from .forms import SignUpForm, CommentForm, DogForm, EditForm
-import logging
 import boto3
 import uuid
 import os
 from itertools import islice
-
-
-
-# Create your views here.
-
 
 def home(request):
     try:
@@ -33,7 +26,6 @@ def home(request):
         return render(request, 'home.html', {'dogs': dogs})
         
 
-
 def about(request):
     return render(request, 'about.html')
 
@@ -42,8 +34,6 @@ def dogs_index(request):
     dogs = Dog.objects.all()
     return render(request, 'dogs/index.html', {'dogs': dogs})
 
-# @login_required
-# @permission_required('main_app.view_dog', raise_exception=True)
 def dogs_detail(request, dog_id):
     try:
         dog = Dog.objects.get(id=dog_id)
@@ -56,8 +46,7 @@ def dogs_detail(request, dog_id):
         return render(request, 'exception_handlers/dog_not_found.html', status=404)
     
 
-
-# @login_required
+@login_required
 def add_comment(request, dog_id):
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -76,6 +65,7 @@ def delete_comment(request, comment_id, dog_id):
         if request.method == 'POST':
             comment.delete()
         return redirect('detail', dog_id=dog_id)
+
 
 class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog
@@ -128,15 +118,8 @@ def add_picture(request, dog_id):
                 Picture.objects.create(url=url, dog_id=dog_id)
             except Exception as e:
                 print('An error occurred uploading file to S3')
-                print(e)
-        # print(request.META['REMOTE_ADDR'])
-        # print(request.META.get('HTTP_X_REAL_IP'))
-        # print(request.META.get('HTTP_X_FORWARDED_FOR'))
         return redirect('detail', dog_id=dog_id)
     else:
-        # print(request.META['REMOTE_ADDR'])
-        # print(request.META.get('HTTP_X_REAL_IP'))
-        # print(request.META.get('HTTP_X_FORWARDED_FOR'))
         return redirect('detail', dog_id=dog_id)
 
 

@@ -21,7 +21,6 @@ class PermissionDeniedCustomHandler:
                 context=context,
                 status=403
             )
-            # return redirect('permission_denied')
         return None
     
 

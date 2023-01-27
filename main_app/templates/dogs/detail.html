@@ -3,7 +3,6 @@
 {% load crispy_forms_filters %} 
 {% block content %}
 
-
 <h1 class="center-align">{{ dog.name }}</h1>
 <div class="divider"></div>
 <br>
@@ -53,9 +52,6 @@
             {% endif %}
 
         </div>
-    
-        <!-- temp element for s3bucket -->
-
         <div class="row">
             {% for picture in dog.picture_set.all %}
             {% if picture != dog.picture_set.first  %}
@@ -65,7 +61,6 @@
             {% endif %}
             {% endfor %}
         </div>
-    
         {% if user == dog.user %}
         <form action="{% url 'add_picture' dog.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
             {% csrf_token %}

@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 
-# Create your models here.
 STATUS = (
     ('NOT FOUND', 'Not Found'),
     ('FOUND', 'Found'),
@@ -29,7 +28,6 @@ class Dog(models.Model):
 
     def __str__(self):
         return self.name
-        # return f'{self.get_date_missing_display()} on {self.date}'
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'dog_id': self.id})
