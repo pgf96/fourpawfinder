@@ -6,12 +6,13 @@ Four Paw Finder is a place where you can go to connect with your community to he
 - Django
 - Python
 - Bootstrap
+- PostgreSQL
 - CSS
 
 ## Getting Started
 
-github link
-deployment link
+https://github.com/pgf96/fourpawfinder.git
+https://fourpawfinder.herokuapp.com/
 
 ### Instructions:
 - To begin create an account and login.
