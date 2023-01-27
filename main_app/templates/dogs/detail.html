@@ -18,10 +18,9 @@
             </div>
         </div>
 </div>
-
+<p><span id="dog-status">{{dog.status}}</span></p>
 <div class="container details-container shadow p-3 mb-5 bg-white ">
     <div id="details">
-        <p><span id="dog-status">{{dog.status}}</span></p>
         <div class="card-panel detail-panel">
             <table class="table details">
                 <tbody>
@@ -49,11 +48,6 @@
             </div>
 
             {% if dog.user == user %}
-            <div class="edit-delete">
-                {{ dog.user }}
-                <a href="{% url 'dogs_update' dog.id %}">edit </a>
-                <a href="{% url 'dogs_delete' dog.id %}">delete </a>
-            </div>
             {% endif %}
 
         </div>
@@ -101,12 +95,14 @@
             <blockquote class="blockquote mb-0">
             <p>{{ comment.content }}</p>
         </div>
+        {% if comment.user == user %}
         <form method="POST" action="{% url 'delete_comment' comment.dog.id comment.id %}" class="right-align">
             {% csrf_token %}
             <button type="submit" class="btn btn-primary" id="comment-delete">
                 <i class="bi bi-trash"></i>
             </button>
         </form>
+        {% endif %}
     </div>
     {% endfor %}
 </div>
