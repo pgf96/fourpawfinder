@@ -7,22 +7,24 @@
 <h1 class="center-align">{{ dog.name }}</h1>
 <div class="divider"></div>
 <br>
-<div class="container text-center main-picture">
-        <div class="row justify-content-md-center">
-            <div class="col-6">
-                <div class="card">
-                    {% if dog.picture_set.first.url != None %}
-                    <img src="{{dog.picture_set.first.url}}" class="rounded mx-auto d-block main-picture">
-                    {% endif %}
+<div id="main-pic">
+    <div class="container text-center main-picture">
+            <div class="row justify-content-md-center">
+                <div class="col-6">
+                    <div class="card">
+                        {% if dog.picture_set.first.url != None %}
+                        <img src="{{dog.picture_set.first.url}}" class="rounded mx-auto d-block main-picture">
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
+    </div>
 </div>
-<p><span id="dog-status">{{dog.status}}</span></p>
-<div class="container details-container shadow p-3 mb-5 bg-white ">
+<p id="cont-status"><span id="dog-status">{{dog.status}}</span></p>
+<div class="container details-container shadow p-3 mb-5 bg-white rounded">
     <div id="details">
-        <div class="card-panel detail-panel">
-            <table class="table details">
+        <div class="detail-panel">
+            <table class="table details table-elements">
                 <tbody>
                     <tr>
                         <td>Breed</td>
@@ -44,7 +46,7 @@
             </table>
             <div >
                 <p class="description"> Description</p>
-                <p> {{dog.description}}</p>
+                <p id="dog-description"> {{dog.description}}</p>
             </div>
 
             {% if dog.user == user %}
@@ -84,8 +86,9 @@
 
 <br>
 <div class="comment-title">Comments</div>
-<div class="container comment-container">
+<div class="container">
     {% for comment in dog.comment_set.all %}
+    <div class="comment-card">
     <div class="card">
         <div class="card-header" id="top-of-comment">
             <span class="username"><i class="bi bi-person"></i> {{comment.user.username}}</span>
@@ -104,16 +107,23 @@
         </form>
         {% endif %}
     </div>
+    </div>
     {% endfor %}
 </div>
-<div class="container comment-add-container">
-    <div class="comment-form">
-        <form action="{% url 'add_comment' dog.id %}" method="POST">
-            {% csrf_token %}
-            {{ comment_form|crispy }}
-                <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+{% if user.is_authenticated %}
+<div id="form-comment">
+    <div class="container comment-add-container">
+        <div class="comment-form">
+            <form action="{% url 'add_comment' dog.id %}" method="POST">
+                {% csrf_token %}
+                {{ comment_form|crispy }}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
 </div>
+{% endif %}
+
+<br><br>
 
 {% endblock %}

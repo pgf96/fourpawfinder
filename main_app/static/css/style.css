@@ -69,6 +69,10 @@ img.main-picture {
     background-color: white;
 }
 
+#main-pic{
+    padding-left: 10px;
+}
+
 .container.main-picture {
     padding-bottom: 18px;
 }
@@ -90,6 +94,12 @@ label{
     font-size: 17px !important;
 }
 
+/* -------home page------ */
+
+.home-cards{
+    width: 30vw;
+}
+
 /* --------details page---------- */
 
 .main-pic{
@@ -102,6 +112,10 @@ label{
 
 table.details>tbody>tr>td {
     color: var(--theme-color);
+}
+
+.table-elements{
+    line-height: 55px;
 }
 
 #dog-status{
@@ -118,9 +132,23 @@ table.details>tbody>tr>td {
     background-color: #9fa8da;
 }
 
+#cont-status{
+    padding: 5px 0 10px 0;
+}
+
+#dog-description{
+    margin-bottom: 20px;
+    line-height: 35px;
+}
+
 .detail-panel{
     background-color: white;
-    margin-top: 40px;
+    /* margin-top: 0px; */
+}
+
+.card-panel{
+    margin-top: 2%;
+    line-height: 20px;
 }
 
 .table-value{
@@ -185,6 +213,17 @@ table.details>tbody>tr>td {
 
 .description {
     text-align: center;
+    padding: 10px 0 10px 0;
+    font-size: 25px;
+}
+
+.comment-card{
+    padding-bottom: 13px;
+}
+
+#form-comment{
+    padding-top: 10px;
+    margin-left: 10%;
 }
 
 #comment-delete{
