@@ -19,14 +19,19 @@ from itertools import islice
 
 
 def home(request):
-    dogs = Dog.objects.all()
-    dog1, dog2, dog3 = (dog for i, dog in enumerate(islice(dogs, 3)) )
-    context = {
-        'dog1': dog1,
-        'dog2': dog2,
-        'dog3': dog3,      
-    }
-    return render(request, 'home.html', context)
+    try:
+        dogs = Dog.objects.all()
+
+        dog1, dog2, dog3 = (dog for i, dog in enumerate(islice(dogs, 3)) )
+        context = {
+            'dog1': dog1,
+            'dog2': dog2,
+            'dog3': dog3,      
+        }
+        return render(request, 'home.html', context)
+    except ValueError:
+        return render(request, 'home.html', {'dogs': dogs})
+        
 
 
 def about(request):
