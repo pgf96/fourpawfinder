@@ -29,8 +29,8 @@ nav {
 }
 
 p {
-    line-height: 30px;
-    font-size: 20px;
+    line-height: 40px;
+    font-size: 22px;
 }
 
 .nav-item > .nav-link {
@@ -98,6 +98,13 @@ label{
 
 .home-cards{
     width: 30vw;
+}
+
+/* -------------about page--------------- */
+
+#about{
+    font-size: 25px;
+    line-height: 60px;
 }
 
 /* --------details page---------- */
