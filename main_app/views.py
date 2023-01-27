@@ -22,7 +22,7 @@ def home(request):
     try:
         dogs = Dog.objects.all()
 
-        dog1, dog2, dog3 = (dog for i, dog in enumerate(islice(dogs, 3)) )
+        dog1, dog2, dog3 = (dog for i, dog in enumerate(islice(dogs, 3)))
         context = {
             'dog1': dog1,
             'dog2': dog2,
