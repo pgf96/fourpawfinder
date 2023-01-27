@@ -208,15 +208,12 @@ h3 {
 }
 .card-header#top-of-comment>span {
     color: white;
-<<<<<<< HEAD
-}
-=======
 
 }
 
 .card-img-top {
     width: 100%;
-    height: 10vw;
+    height: 20vw;
     object-fit: cover;
 }
 
@@ -275,4 +272,3 @@ h3 {
       flex-direction: column;
     }
   }
->>>>>>> main
