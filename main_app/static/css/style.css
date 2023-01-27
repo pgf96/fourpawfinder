@@ -78,7 +78,7 @@ img.main-picture {
 
 h1{
     font-size: 70px;
-    padding: 10px 0 0 20px;
+    padding: 50px 0 0 20px;
     text-align: center;
 }
 
@@ -197,6 +197,7 @@ table.details>tbody>tr>td {
     height: 300px
 } */
 
+/* ------index page----- */
 
 h3 {
    padding: 10px;
@@ -227,6 +228,15 @@ h3 {
 }
 .card-header#top-of-comment>span {
     color: white;
+}
+
+.card-line{
+    font-size: 18px;
+    margin: 5px 0 0 0;
+}
+
+.card-row{
+    padding-bottom: 10px;
 }
 
 .wrapper {
