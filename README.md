@@ -24,9 +24,10 @@ deployment link
 
 
 ## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+![Home_Page_Screenshot](https://user-images.githubusercontent.com/116606658/215010488-b6f1a0fe-6f71-4539-9d5c-6197bde22d52.png)
+![Add_Report_Screenshot](https://user-images.githubusercontent.com/116606658/215010496-2f6cf2f1-deda-406a-b313-57baf4cd2575.png)
+![Details_Page_Screenshot](https://user-images.githubusercontent.com/116606658/215010504-60b5e913-0bae-440b-a0ec-39ba96d3fa39.png)
+![Missing_List_Screenshot](https://user-images.githubusercontent.com/116606658/215010511-f1dfd437-d0d2-4e92-8af2-273a73635f4c.png)
 
 ## Wireframe
 ![Add Report](https://user-images.githubusercontent.com/116606658/215002897-9000a9ab-53a9-4d36-adea-ddf0626280e3.png)
