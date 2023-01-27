@@ -14,7 +14,7 @@ class Dog(models.Model):
     name = models.CharField(max_length=50)
     breed = models.CharField(max_length=50)
     age = models.IntegerField()
-    description = models.TextField(max_length=250)
+    description = models.TextField(max_length=1000)
     location = models.CharField(max_length=50)
     date_missing = models.DateField('date missing')
     date_created = models.DateTimeField(default=timezone.now)
